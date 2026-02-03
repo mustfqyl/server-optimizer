@@ -17,6 +17,7 @@ ip -o link show | awk -F': ' '{print $2}' | grep -v lo
 echo
 
 read -rp "➡️ Enter primary network interface (e.g. eth0): " IFACE
+IFACE=$(echo "$IFACE" | tr -d '[:space:]')
 if ! ip link show "$IFACE" &>/dev/null; then
   echo "❌ Interface not found"
   exit 1
